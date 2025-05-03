@@ -306,7 +306,8 @@ def get_ai_response(user_input, mode):
     try:
         log_entry("Initializing OpenAI client")
         # Use OpenAI's updated API format
-        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        # client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
         log_entry("OpenAI client initialized successfully")
         
         # Log model and parameters
