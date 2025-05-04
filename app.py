@@ -424,34 +424,79 @@ def get_ai_response(user_input, mode):
     # Example response format - exactly matching the expected output
     example_response = """
     {
-        "Task: \\"Buy Spectacles (Don't Know What Frames Are Nice)\\"": {
-            "Robotic Mode (For Paralysis)": [
-                "1. Spend 2 mins: Google \\"best glasses for [face shape]\\" → Screenshot 1-2 frames you like.",
-                "2. Tomorrow: Show screenshots to a friend (text: \\"Which of these suits me?\\").",
-                "3. Next day: Book 10-min try-on at nearest optician (link to book).",
-                "4. Try on at least 3 frames and take photos."
+            "Task: \\"Research glasses frames (Overwhelmed by choices)\\"": {
+            "Robotic Mode (For Decision Paralysis)": [
+                "1. **Browse options**: Google → \\"best frames for oval face\\"",
+                "2. **Save examples**: Screenshot top 3 → Save to \\"Frames\\" folder",
+                "3. **Get opinions**: Text Sarah: \\"Which of these 3?\\" (by Friday)",
+                "4. **Book try-on**: Use *Warby Parker* app → Schedule in-store "
             ],
             "Creative Mode (Explore Options)": [
-                "🎥 Watch \\"How to Pick Glasses\\" by [YouTube stylist] (8 mins).",
-                "📱 *Use \\"Warby Parker Virtual Try-On\\" app* (play with 5 frames).",
-                "💡 Ask ChatGPT: \\"I like [description]. Suggest frame styles?\\"",
-                "🔍 Browse Pinterest for \\"glasses for [face shape]\\" inspiration.",
-                "👁️ Make a list of pros and cons for each frame."
+                "🤖 *AI, suggest frames for [your face shape] + [skin tone]*",
+                "🎨 *Try the 'Opposite Game': Pick 1 style you'd never wear first*",
+                "👯 *Virtual try-on party: Screen share with 2 friends*",
+                "📸 *Take selfies with 3 filters → See which frames work best*",
+                "💡 *Ask Reddit: 'Most comfortable frames for big heads?'*",
+                "🛍️ *Visit a thrift store → Try random vintage frames for fun*"
             ],
-            "Activation Hack": "\\"Just find 1 frame you hate—elimination is progress!\\""
+            "Activation Hack": "\\"Just search for 1 frame you'd NEVER wear\\""
         },
-        "Task: \\"Do Personal Projects (Too Many Ideas)\\"": {
+            "Task: \\"Organize digital photos (10,000+ chaos)\\"": {
             "Robotic Mode (For Overwhelm)": [
-                "1. Dump all ideas into app → AI auto-tags:",
-                "2. Pick 1 \\"easy win\\" → \\"Code a button that changes color on click (1-hour project).\\"",
-                "3. Set timer for 25 mins and start."
+                "1. **Install tool**: Download *Gemini Photos* → Open app",
+                "2. **First purge**: Run \\"Find duplicates\\" → Delete 100",
+                "3. **Create folders**: \\"2024\\", \\"Family\\", \\"Travel\\"",
+                "4. **Daily habit**: Sort 20 photos/day → Right after breakfast",
+                "5. **Backup**: Setup *Google Photos* auto-upload tonight"
             ],
-            "Creative Mode (Explore + Narrow Down)": [
-                "🤖 \\"AI, rank my projects by: fun, learning, portfolio value.\\"",
-                "🎲 Roll a dice: Let fate pick your next project!",
-                "🎯 Block out exactly 30 minutes for project exploration."
+            "Creative Mode (Alternative Approaches)": [
+                "🎵 *Create a 'Photo Sorting' playlist (only listen while organizing)*",
+                "📅 *Turn it into a challenge: '100 photos/day for 10 days'*",
+                "🤖 *Use AI: 'Group photos by decade/color/emotion'*",
+                "👥 *Live-stream sorting (let viewers pick categories)*",
+                "🍿 *Pretend you're a museum archivist (create 'exhibits')*",
+                "💸 *Reward jar: $1 per 100 photos sorted → Buy something nice*"
             ],
-            "Activation Hack": "\\"Work on any project for 5 mins—no commitment.\\""
+            "Activation Hack": "\\"Delete just 3 terrible photos - that's enough!\\""
+        },
+            "Task: \\"Learn Cursor AI (New coding tool)\\"": {
+            "Robotic Mode (For Beginners)": [
+                "1. **Sign up**: Go to cursor.sh → Click \\"Try Free\\"",
+                "2. **First test**: Install → Open VS Code project",
+                "3. **Try command**: Press Cmd+K → Type \\"explain this function\\"",
+                "4. **Daily goal**: Use for 1 code review/day (start today)",
+                "5. **Join community**: Register for Cursor Discord (Tomorrow AM)",
+                "6. **Watch intro**: \\"Cursor in 5 minutes\\" (official video)",
+                "7. **Bookmark**: Save docs.cursor.sh in \\"Dev Tools\\" folder"
+            ],
+            "Creative Mode (Advanced Exploration)": [
+                "🎮 *Treat it like a game: Unlock 1 new feature/day*",
+                "🤝 *Partner with a 'Cursor Buddy' (compare discoveries weekly)*",
+                "📝 *Start a 'Cursor Experiments' blog (even if private)*",
+                "💡 *Try the 'Stupid Test': Break it in fun ways first*",
+                "🧩 *Combine with ChatGPT: 'Explain Cursor features like I'm 5'*",
+                "🏆 *Create achievement badges (e.g., 'First AI Commit')*"
+            ],
+            "Activation Hack": "\\"Just read the first paragraph of docs - no pressure!\\""
+        },
+            "Task: \\"Plan Mom's birthday (Need ideas)\\": {
+            "Robotic Mode (For Decision Fatigue)": [
+                "1. **Brainstorm**: Jot 3 gift ideas in Notes app",
+                "2. **Check calendar**: Confirm her availability (Today)",
+                "3. **Text sis**: \\"Help choose: [X] or [Y]?\\" (by Wednesday)",
+                "4. **Order gift**: Use *Amazon* → 2-day delivery cutoff",
+                "5. **Make res**: Book *Olive Garden* → 7pm Friday",
+                "6. **Set reminders**: \\"Wrap gift\\", \\"Buy flowers\\" (Thursday)"
+            ],
+            "Creative Mode (Special Touches)": [
+                "📽️ *Make a 'Mom Through the Decades' slideshow (use old photos)*",
+                "✉️ *Secretly gather 1-sentence memories from family/friends*",
+                "🎂 *Recreate her childhood cake (funny attempt counts!)*",
+                "🕺 *Make a playlist of #1 hits from her teen years*",
+                "📖 *Handwrite a letter about your favorite shared memory*",
+                "🌱 *Plant something together (that grows yearly)*"
+            ],
+            "Activation Hack": "\\"Start by texting your sister 'Hey, need bday help'\\""
         }
     }
     """
@@ -505,7 +550,7 @@ def get_ai_response(user_input, mode):
         
         # Show initial animation frame
         start_time = time.time()
-        animation_placeholder.markdown(f"<h3>⠋ Generating response... (0.0s)</h3>", unsafe_allow_html=True)
+        animation_placeholder.markdown(f"<h3>⠋ Generating response... </h3>", unsafe_allow_html=True)
         
         # Make the API call
         log_entry("Sending request to OpenAI API", "API")
@@ -550,6 +595,7 @@ def checkbox_callback(step_key):
     st.session_state.task_states[step_key] = not current_value #toggle the state of the checkbox
     log_entry(f"Checkbox {step_key} toggled to {st.session_state.task_states[step_key]}")
 
+
 def parse_json_response(response_text):
     """Parse the JSON response from the API"""
     try:
@@ -585,20 +631,8 @@ st.info(display_random_tip())
 st.markdown("### 💖 You are loved. You are enough. You are not alone.")
 st.success(display_adhd_affirmation())
 
-# Add a section for logs with expander
-# with st.expander("View Logs & Debug Info", expanded=False):
-#     display_logs()
-#     if st.button("Clear Logs"):
-#         st.session_state.logs = []
-
 mode = ["🤖 Robotic: Hyper-specific, minimal decision making, lowest activation energy", "🎨 Creative: Multiple approaches with visual aids and technology options"]
 log_entry(f"Mode selected: {mode}")
-
-# Explain modes
-# if mode == "🤖 Robotic":
-#     st.caption("Robotic Mode: Hyper-specific, minimal decision making, lowest activation energy")
-# else:
-#     st.caption("Creative Mode: Multiple approaches with visual aids and technology options")
 
 # Add a slider in the sidebar for task granularity level
 st.sidebar.markdown("### Task Granularity")
@@ -666,11 +700,43 @@ if st.session_state.last_tasks:
     # Now you can use the tasks variable
     st.subheader(f"Your Recommended AI-Generated Action Plan: ({len(tasks)} tasks)")
     
+    # Create a copy of the task items to allow safe removal during iteration
+    task_items = list(tasks.items())
+    
     # Display tasks
-    for task_index, (task_name, modes) in enumerate(tasks.items(), 1):
+    for task_index, (task_name, modes) in enumerate(task_items, 1):
         log_entry(f"Displaying task: {task_name}")
         log_entry(f"Modes: {modes}")
         log_entry(f"Task index: {task_index}")
+        
+        # Count total and completed subtasks
+        total_subtasks = 0
+        completed_subtasks = 0
+        
+        # Check Robotic Mode subtasks
+        if any(key.startswith("Robotic Mode") for key in modes.keys()):
+            robotic_key = next((key for key in modes.keys() if key.startswith("Robotic Mode")), None)
+            if robotic_key and isinstance(modes[robotic_key], list):
+                for i in range(len(modes[robotic_key])):
+                    step_key = f"task_{task_index}_robotic_{i}"
+                    total_subtasks += 1
+                    if st.session_state.task_states.get(step_key, False):
+                        completed_subtasks += 1
+        
+        # Check Creative Mode subtasks
+        if any(key.startswith("Creative Mode") for key in modes.keys()):
+            creative_key = next((key for key in modes.keys() if key.startswith("Creative Mode")), None)
+            if creative_key and isinstance(modes[creative_key], list):
+                for i in range(len(modes[creative_key])):
+                    step_key = f"task_{task_index}_creative_{i}"
+                    total_subtasks += 1
+                    if st.session_state.task_states.get(step_key, False):
+                        completed_subtasks += 1
+        
+        # Skip displaying this task if all subtasks are completed and there's at least one subtask
+        if total_subtasks > 0 and completed_subtasks == total_subtasks:
+            log_entry(f"Task {task_index} is fully completed ({completed_subtasks}/{total_subtasks}) - skipping display")
+            continue
         
         # Clean up task name - remove "Task:" prefix and quotes
         clean_task_name = task_name
@@ -709,7 +775,9 @@ if st.session_state.last_tasks:
                         st.checkbox(
                             display_step,
                             key=step_key,
-                            value=st.session_state.task_states.get(step_key, False)
+                            value=st.session_state.task_states.get(step_key, False),
+                            on_change=checkbox_callback,
+                            args=(step_key,)
                         )
             
             # Creative Mode
@@ -733,7 +801,9 @@ if st.session_state.last_tasks:
                         st.checkbox(
                             step,
                             key=step_key,
-                            value=st.session_state.task_states.get(step_key, False)
+                            value=st.session_state.task_states.get(step_key, False),
+                            on_change=checkbox_callback,
+                            args=(step_key,)
                         )
             
             # Activation Hack (rendered differently - as a callout)
@@ -741,12 +811,14 @@ if st.session_state.last_tasks:
                 hack_text = modes["Activation Hack"].replace('⚡ **Activation Hack:**', '')
                 st.markdown(f"<div class='mode-header'>Activation Hack:</div>", unsafe_allow_html=True)
                 st.markdown(f"<div class='activation-hack'>{hack_text}</div>", unsafe_allow_html=True)
-        
-        # Task divider (optional, as expanders already provide visual separation)
-        # if task_index < len(tasks):
-        #     st.markdown("<hr class='task-divider'>", unsafe_allow_html=True)
-        
-# Add this at the end of your app after all other UI elements
+            
+            # Display completion status
+            if total_subtasks > 0:
+                completion_percentage = int((completed_subtasks / total_subtasks) * 100)
+                st.progress(completion_percentage / 100)
+                st.markdown(f"**{completed_subtasks}/{total_subtasks}** subtasks completed ({completion_percentage}%)")
+
+# For debuggin
 # with st.expander("🔍 View Raw Model Response", expanded=False):
 #     if 'raw_model_response' in st.session_state and st.session_state.raw_model_response:
 #         st.code(st.session_state.raw_model_response, language="json")
