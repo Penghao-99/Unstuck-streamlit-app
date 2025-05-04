@@ -568,7 +568,7 @@ def checkbox_callback(step_key):
     st.session_state.task_states[step_key] = not current_value #toggle the state of the checkbox
     log_entry(f"Checkbox {step_key} toggled to {st.session_state.task_states[step_key]}")
     # Force a rerun to update the UI
-    st.rerun()
+    # st.rerun()
 
 
 def parse_json_response(response_text):
