@@ -30,7 +30,7 @@ st.markdown("""
     
     /* Mode headers */
     .mode-header {
-        font-size: 1.1rem;
+        font-size: 1.0rem;
         font-weight: 600;
         margin: 15px 0 10px 0;
         color: #333;
@@ -107,23 +107,27 @@ st.markdown("""
         border-left: 4px solid #52c41a;
     }
     
-    /* Additional CSS specifically for expander headers */
-    .task-expander-header {
-        font-size: 1.6rem !important;
-        font-weight: 800 !important;
-        color: #1e3a8a !important;
-        padding: 10px !important;
-    }
-    
-    
     /* Target additional Streamlit expander classes */
     div[data-testid="stExpander"] {
         border-left: 5px solid #4CAF50 !important;
         background-color: #f8f9fa !important;
         border-radius: 8px !important;
     }
+
+
+    /* Target only the expander header text */
     .st-emotion-cache-1h9usn1 p {
         font-size: 18px !important;
+        background-color: #e6f3ff !important;  /* Light blue background */
+        padding: 4px 8px !important;
+        border-radius: 4px !important;
+        display: inline-block !important;
+    }
+    
+    /* Ensure checkbox labels remain unaffected */
+    .stCheckbox label p {
+        background-color: transparent !important;
+        padding: 0 !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -158,37 +162,6 @@ def display_logs():
             log_html += f"<div class='log-entry'>{entry}</div><br>"
         log_html += "</div>"
         st.markdown(log_html, unsafe_allow_html=True)
-
-# Example JSON output for the LLM
-JSON_EXAMPLE = """
-{
-    "Buy Spectacles (Don't Know What Frames Are Nice)": {
-        "Robotic Mode (For Paralysis):": [
-            "1. **Spend 2 mins**: Google "best glasses for [face shape]" → Screenshot 1-2 frames you like.",
-            "2. **Tomorrow**: Show screenshots to a friend (text: "Which of these suits me?").",
-            "3. **Next day**: Book 10-min try-on at nearest optician (link to book)."
-        ],
-        "Creative Mode": [
-            "🎥 Watch "How to Pick Glasses" by [YouTube stylist] (8 mins).",
-            "📱 *Use "Warby Parker Virtual Try-On" app (play with 5 frames).*",
-            "💡 Ask ChatGPT: "I like [description]. Suggest frame styles?"",
-            "⚡ Activation Hack: "Just find 1 frame you hate—elimination is progress!""
-        ]
-    },
-    "Task: "Do Personal Projects (Too Many Ideas)": {
-        "Robotic Mode (For Overwhelm):": [
-            "1. Dump all ideas into app → AI auto-tags:",
-            "2. Set a timer for 25 mins: Focus on the first task without distractions.",
-            "3. After 25 mins, take a 5-min break to stretch or grab water."
-        ],
-        "Creative Mode": [
-            "🗂️ Use a 'Kanban board' (like Trello) to visualize tasks and progress.",
-            "📱 Try the 'Forest' app to stay focused while working and grow a virtual tree.",
-            "⚡ Activation Hack: 'Start with the easiest task for just 5 mins—momentum builds!'"
-        ]
-    }
-}
-"""
 
 def display_random_tip():
     """Display a random ADHD productivity tip"""
@@ -424,7 +397,7 @@ def get_ai_response(user_input, mode):
     # Example response format - exactly matching the expected output
     example_response = """
     {
-            "Task: \\"Research glasses frames (Overwhelmed by choices)\\"": {
+            "Task: \\"Research glasses frames\\"": {
             "Robotic Mode (For Decision Paralysis)": [
                 "1. **Browse options**: Google → \\"best frames for oval face\\"",
                 "2. **Save examples**: Screenshot top 3 → Save to \\"Frames\\" folder",
@@ -441,7 +414,7 @@ def get_ai_response(user_input, mode):
             ],
             "Activation Hack": "\\"Just search for 1 frame you'd NEVER wear\\""
         },
-            "Task: \\"Organize digital photos (10,000+ chaos)\\"": {
+            "Task: \\"Organize digital photos \\"": {
             "Robotic Mode (For Overwhelm)": [
                 "1. **Install tool**: Download *Gemini Photos* → Open app",
                 "2. **First purge**: Run \\"Find duplicates\\" → Delete 100",
@@ -459,7 +432,7 @@ def get_ai_response(user_input, mode):
             ],
             "Activation Hack": "\\"Delete just 3 terrible photos - that's enough!\\""
         },
-            "Task: \\"Learn Cursor AI (New coding tool)\\"": {
+            "Task: \\"Learn Cursor AI\\"": {
             "Robotic Mode (For Beginners)": [
                 "1. **Sign up**: Go to cursor.sh → Click \\"Try Free\\"",
                 "2. **First test**: Install → Open VS Code project",
@@ -479,7 +452,7 @@ def get_ai_response(user_input, mode):
             ],
             "Activation Hack": "\\"Just read the first paragraph of docs - no pressure!\\""
         },
-            "Task: \\"Plan Mom's birthday (Need ideas)\\": {
+            "Task: \\"Plan Mom's birthday\\": {
             "Robotic Mode (For Decision Fatigue)": [
                 "1. **Brainstorm**: Jot 3 gift ideas in Notes app",
                 "2. **Check calendar**: Confirm her availability (Today)",
@@ -594,6 +567,8 @@ def checkbox_callback(step_key):
     current_value = st.session_state.task_states.get(step_key, False) #step_key is the key of the checkbox, False is the default value if the key is not found
     st.session_state.task_states[step_key] = not current_value #toggle the state of the checkbox
     log_entry(f"Checkbox {step_key} toggled to {st.session_state.task_states[step_key]}")
+    # Force a rerun to update the UI
+    st.rerun()
 
 
 def parse_json_response(response_text):
@@ -620,8 +595,8 @@ def parse_json_response(response_text):
         return None
 
 # App Layout
-st.title("🧠 Brain Dump → Steps")
-st.markdown("#### ADHD/Autism-friendly task breakdown with activation energy hacks")
+st.title("🧠 Brain Dump → To-do List")
+# st.markdown("#### ADHD/Autism-friendly task breakdown with activation energy hacks")
 
 # Random tip
 st.markdown("### 💡 Tip:")
@@ -665,6 +640,10 @@ if st.button("✨ Process My Chaos"):
     log_entry("Process button clicked")
     if user_input:
         log_entry(f"Processing input: '{user_input}'")
+        
+        # IMPORTANT: Reset all task states when processing a new input
+        st.session_state.task_states = {}
+        log_entry("Reset task states for new prompt")
         
         # Get emotional validation
         validation = get_emotional_validation(user_input)
@@ -735,8 +714,10 @@ if st.session_state.last_tasks:
         
         # Skip displaying this task if all subtasks are completed and there's at least one subtask
         if total_subtasks > 0 and completed_subtasks == total_subtasks:
-            log_entry(f"Task {task_index} is fully completed ({completed_subtasks}/{total_subtasks}) - skipping display")
-            continue
+            log_entry(f"Task {task_index} is fully completed ({completed_subtasks}/{total_subtasks})")
+            # Display a completion badge for the task instead of hiding it
+            st.success(f"✅ **{task_index}. {task_name}** - Completed!")
+            continue  # Skip the regular display
         
         # Clean up task name - remove "Task:" prefix and quotes
         clean_task_name = task_name
